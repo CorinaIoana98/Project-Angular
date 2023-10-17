@@ -1,0 +1,29 @@
+<div class="main-area">
+  <div class="content-area">
+      <div class="header">
+          <h1>Login Page</h1>
+          <hr>
+      </div>
+      <div class="container">
+          <div class="form-area">
+              <form [formGroup] = 'loginForm' (ngSubmit) = login()>
+                  <div class="label-area">
+                      <label>Email:</label>
+                  </div>
+                  <input type="email" formControlName="email">
+
+                  <div class="label-area">
+                      <label>Password: </label>
+                  </div>
+                  <input type="password" formControlName="password">
+      
+                  <button type="submit" value="Submit">Submit</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
