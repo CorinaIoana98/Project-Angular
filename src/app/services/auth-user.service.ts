@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -18,8 +20,7 @@ import {
   updateDoc,
   where,
 } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',

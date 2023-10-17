@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth-user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
 })
-export class SignUpComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private authService: AuthService, private route: Router) {}
