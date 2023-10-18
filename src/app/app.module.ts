@@ -17,10 +17,13 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AddshiftComponent } from './menu/addshift/addshift.component';
+import { MyshiftsComponent } from './menu/myshifts/myshifts.component';
+import { EditprofileComponent } from './menu/editprofile/editprofile.component';
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HomeAdminComponent, RegisterComponent, LoginComponent],
+  declarations: [AppComponent, HomeComponent, HomeAdminComponent, RegisterComponent, LoginComponent, AddshiftComponent, MyshiftsComponent, EditprofileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

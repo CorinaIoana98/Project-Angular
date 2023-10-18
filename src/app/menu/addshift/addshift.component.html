@@ -1,0 +1,16 @@
+<h2>Add Shift</h2>
+<form [formGroup]="shiftForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <input matInput formControlName="shiftName" placeholder="Shift Id">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput type="time" formControlName="startTime" placeholder="Start Time">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput type="time" formControlName="endTime" placeholder="End Time">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Add Shift</button>
+</form>
