@@ -1,1 +1,18 @@
-<p>home-admin works!</p>
+<div class="home-container">
+    <p>Hello, X !</p>
+
+    <div class="options">
+        <label for="options">Select your action:</label>
+        <select id="options" [(ngModel)]="selectedOption">
+            <option value="allShift">All shifts</option>
+            <option value="allWorkers">All workers</option>
+        </select>
+        <button type="button" (click)="onOptionSelected()">Select</button>
+    </div>
+
+    <button (click)="logout()">Logout</button>
+</div>
+
+<body>
+
+</body>

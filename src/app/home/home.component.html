@@ -1,1 +1,22 @@
-<p>home works!</p>
+<div class="home-container">
+    <p>Hello, X !</p>
+    <p>LOGO</p>
+    <button (click)="logout()">Logout</button>
+</div>
+
+<div class="menu">
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="toggleAddShift()">Add Shift</button>
+        <button mat-menu-item>My Shifts</button>
+        <button mat-menu-item (click)="toggleEditProfile()">Edit Profile</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="menu">Open Menu</button>
+</div>
+
+<ng-container *ngIf="showAddShift">
+    <app-addshift></app-addshift>
+</ng-container>
+<ng-container *ngIf="showEditProfile">
+    <app-editprofile></app-editprofile>
+</ng-container>

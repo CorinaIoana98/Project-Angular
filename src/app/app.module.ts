@@ -12,16 +12,29 @@ import { HomeComponent } from './home/home.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { NavbarComponent } from './navbar/navbar.component';
-
+import { AddshiftComponent } from './menu/addshift/addshift.component';
+import { MyshiftsComponent } from './menu/myshifts/myshifts.component';
+import { EditprofileComponent } from './menu/editprofile/editprofile.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HomeAdminComponent, RegisterComponent, LoginComponent, NavbarComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    HomeAdminComponent,
+    RegisterComponent,
+    LoginComponent,
+    AddshiftComponent,
+    MyshiftsComponent,
+    EditprofileComponent,
+    NavbarComponent,
+  ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,7 +47,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent],
