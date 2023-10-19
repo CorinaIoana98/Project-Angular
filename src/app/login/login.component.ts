@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.value.password
     );
     console.log('user logged in');
-    this.route.navigate(['/events']);
+    this.route.navigate(['/home']);
+    //Conditie de verificare user / admin
   }
 }

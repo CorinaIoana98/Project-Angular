@@ -10,7 +10,15 @@ import { UserServiceService } from '../services/user-service.service';
   styleUrls: ['./home-admin.component.css']
 })
 export class HomeAdminComponent {
-  constructor( private router: Router, private AuthService: AuthService ){}
+  constructor( private router: Router, private AuthService: AuthService ){
+    this.AuthService.getCurrentUser().then(observable=>{
+      observable.subscribe(data=>{
+        console.log(data);
+        this.currentUser=data;
+      })
+    })
+  }
+  currentUser:any;
   username: string = ''; 
   selectedOption: string | null = null;
 
@@ -19,17 +27,19 @@ export class HomeAdminComponent {
     this.router.navigate(['/login']);
   }
 
-  onOptionSelected() {
-    if (this.selectedOption === 'allShift') {
-      this.shiftsButton();
-    } else if (this.selectedOption === 'allWorkers') {
-      this.workersButton();
-    }
-  }
-  shiftsButton() {
-    this.router.navigate(['/shiftsPage'])
-  }
-  workersButton() {
-    this.router.navigate(['/allWorkers'])
-  }
+  // onOptionSelected() {
+  //   if (this.selectedOption === 'allShift') {
+  //     this.shiftsButton();
+  //   } else if (this.selectedOption === 'allWorkers') {
+  //     this.workersButton();
+  //   }
+  // }
+  // shiftsButton() {
+  //   this.router.navigate(['/shiftsPage'])
+  // }
+  // workersButton() {
+  //   this.router.navigate(['/allWorkers'])
+  // }
+  toggleAllShift(){}
+  toggleaAllWorkers(){}
 }

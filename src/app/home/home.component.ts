@@ -1,20 +1,30 @@
 import { AuthService } from './../services/auth-user.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserServiceFirestoreService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   
-  constructor( private router: Router, private AuthService: AuthService ){}
+  constructor( private router: Router, private AuthService: AuthService, private user: UserServiceFirestoreService){
+    this.AuthService.getCurrentUser().then(observable=>{
+      observable.subscribe(data=>{
+        console.log(data);
+        this.currentUser=data;
+      })
+    })
+  }
+  currentUser:any;
 
   // navigateTo(item: string) {
   //   //Navigatia din menu
   //   console.log(`Navigating to ${item}`);
   // }
+
 
   logout() {
     this.AuthService.logout();
@@ -31,5 +41,10 @@ export class HomeComponent {
   toggleEditProfile() {
     this.showEditProfile = !this.showEditProfile;
   }
+
+  ngOnInit(){
+    
+  }
+  
   
 }

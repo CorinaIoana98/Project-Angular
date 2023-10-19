@@ -17,7 +17,6 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
-import { NavbarComponent } from './navbar/navbar.component';
 import { AddshiftComponent } from './menu/addshift/addshift.component';
 import { MyshiftsComponent } from './menu/myshifts/myshifts.component';
 import { EditprofileComponent } from './menu/editprofile/editprofile.component';
@@ -31,8 +30,7 @@ import { EditprofileComponent } from './menu/editprofile/editprofile.component';
     LoginComponent,
     AddshiftComponent,
     MyshiftsComponent,
-    EditprofileComponent,
-    NavbarComponent,
+    EditprofileComponent
   ],
 
   imports: [

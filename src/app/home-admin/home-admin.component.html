@@ -1,16 +1,18 @@
 <div class="home-container">
-    <p>Hello, X !</p>
+    <p>Hello, {{currentUser.fname}} !</p>
 
-    <div class="options">
-        <label for="options">Select your action:</label>
-        <select id="options" [(ngModel)]="selectedOption">
-            <option value="allShift">All shifts</option>
-            <option value="allWorkers">All workers</option>
-        </select>
-        <button type="button" (click)="onOptionSelected()">Select</button>
-    </div>
+    <p>LOGO</p>
 
     <button (click)="logout()">Logout</button>
+</div>
+
+<div class="menu">
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="toggleAllShift()">All Shift</button>
+        <button mat-menu-item (click)="toggleaAllWorkers()">All workers</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="menu">Open Menu</button>
 </div>
 
 <body>

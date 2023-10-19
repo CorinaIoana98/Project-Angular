@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+// import { Observable } from 'rxjs';
 import { Observable } from 'rxjs';
+
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -20,6 +22,7 @@ import {
   updateDoc,
   where,
 } from '@angular/fire/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
 
 @Injectable({
@@ -60,11 +63,12 @@ export class AuthService {
       console.log('Error logging into the system');
     }
   }
-
+  
   async getCurrentUser() {
-    const auth = getAuth();
-    return new Observable((observer) => {
-      auth.onAuthStateChanged(async (user) => {
+ 
+   const user = getAuth();
+ return new Observable((observer) => {
+      user.onAuthStateChanged(async (user) => {
         if (user) {
           let userDocRef = doc(this.firestore, 'users', user.uid);
           let userDoc = getDoc(userDocRef);
@@ -79,7 +83,26 @@ export class AuthService {
         }
       });
     });
-  }
+}
+
+
+    //  return new Observable((observer) => {
+    //   auth.onAuthStateChanged(async (user) => {
+    //     if (user) {
+    //       let userDocRef = doc(this.firestore, 'users', user.uid);
+    //       let userDoc = getDoc(userDocRef);
+
+    //       const userData = {
+    //         ...user,
+    //         ...(await userDoc).data(),
+    //       };
+    //       observer.next(userData);
+    //     } else {
+    //       observer.next(null);
+    //     }
+    //   });
+    // });
+
 
   async logout() {
     try {
@@ -90,23 +113,5 @@ export class AuthService {
     }
   }
 
-  async addNewShift(shift) {
-    const auth = getAuth();
-    return new Observable((observer) => {
-      auth.onAuthStateChanged(async (user) => {
-        if (user) {
-          let userDocRef = doc(this.firestore, 'users', user.uid);
-          let userDoc = getDoc(userDocRef);
-
-          await updateDoc(userDocRef, {
-            shifts: arrayUnion(shift),
-          });
-
-          observer.next();
-        } else {
-          observer.next(null);
-        }
-      });
-    });
-  }
+ 
 }

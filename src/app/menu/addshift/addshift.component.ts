@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Shift } from 'src/app/shift';
+import { UserServiceFirestoreService } from 'src/app/services/firebase.service';
 @Component({
   selector: 'app-addshift',
   templateUrl: './addshift.component.html',
@@ -9,19 +10,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddshiftComponent {
   shiftForm: FormGroup;
 
-  constructor(private formBuilder:FormBuilder){
+  constructor(private formBuilder:FormBuilder, private fireBase: UserServiceFirestoreService){
     this.shiftForm = this.formBuilder.group({
-      shiftName: ['', Validators.required],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required],
+      shiftName: ['' ],
+      startTime: [''],
+      endTime: [''],
     });
   }
 
   onSubmit() {
     if (this.shiftForm.valid) {
-//adaugare in firebase a shiftului
-      console.log('Shift Data:', this.shiftForm.value);
-
+     let shift:Shift={shiftName:this.shiftForm.get('shiftName').value,startTime:this.shiftForm.get('startTime').value,endTime:this.shiftForm.get('endTime').value};
+      this.fireBase.addNewShift(shift);
       this.shiftForm.reset();
     }
 
