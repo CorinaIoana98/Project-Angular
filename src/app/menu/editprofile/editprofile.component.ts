@@ -13,7 +13,7 @@ export class EditprofileComponent {
     this.profileForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      userId: ['', [Validators.required]],
     });
   }
 
