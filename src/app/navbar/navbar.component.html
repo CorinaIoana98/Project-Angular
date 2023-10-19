@@ -1,0 +1,13 @@
+<p>navbar works!</p>
+<div class="navbar-header navbar-right">
+  <li *ngIf="currentUser">Welcome, {{ currentUser.fname }}</li>
+  <ul class="nav navbar-nav">
+    <li style="padding: 10px 15px" routerLink="register" *ngIf="!currentUser">
+      Register
+    </li>
+    <li style="padding: 10px 15px" routerLink="register" *ngIf="!currentUser">
+      Login
+    </li>
+    <li style="padding: 10px 15px" ,(click)="logout()">Logout</li>
+  </ul>
+</div>
