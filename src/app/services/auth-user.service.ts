@@ -24,7 +24,6 @@ import {
 } from '@angular/fire/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -63,11 +62,10 @@ export class AuthService {
       console.log('Error logging into the system');
     }
   }
-  
+
   async getCurrentUser() {
- 
-   const user = getAuth();
- return new Observable((observer) => {
+    const user = getAuth();
+    return new Observable((observer) => {
       user.onAuthStateChanged(async (user) => {
         if (user) {
           let userDocRef = doc(this.firestore, 'users', user.uid);
@@ -83,27 +81,7 @@ export class AuthService {
         }
       });
     });
-}
-
-
-    //  return new Observable((observer) => {
-    //   auth.onAuthStateChanged(async (user) => {
-    //     if (user) {
-    //       let userDocRef = doc(this.firestore, 'users', user.uid);
-    //       let userDoc = getDoc(userDocRef);
-
-    //       const userData = {
-    //         ...user,
-    //         ...(await userDoc).data(),
-    //       };
-    //       observer.next(userData);
-    //     } else {
-    //       observer.next(null);
-    //     }
-    //   });
-    // });
-
-
+  }
   async logout() {
     try {
       const auth = getAuth();
@@ -113,5 +91,20 @@ export class AuthService {
     }
   }
 
- 
+  async addNewShift(shift) {
+    const auth = getAuth();
+    return new Observable((observer) => {
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          let userDocRef = doc(this.firestore, 'users', user.uid);
+          await updateDoc(userDocRef, {
+            shift: arrayUnion(shift),
+          });
+          observer.next();
+        } else {
+          observer.next(null);
+        }
+      });
+    });
+  }
 }
