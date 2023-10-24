@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
       });
     });
   }
- 
 
   // navigateTo(item: string) {
   //   //Navigatia din menu
@@ -43,6 +42,10 @@ export class HomeComponent implements OnInit {
   showEditProfile: boolean = false;
   toggleEditProfile() {
     this.showEditProfile = !this.showEditProfile;
+  }
+  showMyshifts: boolean = false;
+  toggleMyshifts() {
+    this.showMyshifts = !this.showMyshifts;
   }
 
   ngOnInit() {}

@@ -8,6 +8,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   signOut,
+  user,
 } from '@angular/fire/auth';
 import {
   Firestore,
@@ -103,6 +104,19 @@ export class AuthService {
           observer.next();
         } else {
           observer.next(null);
+        }
+      });
+    });
+  }
+  async getEditShifts() {
+    const auth = getAuth();
+    return new Observable((observer) => {
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          const userDocRef = doc(this.firestore, 'users', user.uid);
+          const userDoc = getDoc(userDocRef);
+          const userData = (await userDoc).data();
+          observer.next(userData['shifts']);
         }
       });
     });

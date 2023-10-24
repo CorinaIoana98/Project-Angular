@@ -19,6 +19,7 @@ export class AddshiftComponent {
       shiftName: [''],
       startTime: [''],
       endTime: [''],
+      priceShifts: [''],
     });
   }
 
@@ -28,6 +29,7 @@ export class AddshiftComponent {
         shiftName: this.shiftForm.get('shiftName').value,
         startTime: this.shiftForm.get('startTime').value,
         endTime: this.shiftForm.get('endTime').value,
+        priceShifts: this.shiftForm.get('priceShifts').value,
       };
       this.fireBase.addNewShift(shift);
       this.shiftForm.reset();

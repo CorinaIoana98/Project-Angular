@@ -20,6 +20,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AddshiftComponent } from './menu/addshift/addshift.component';
 import { MyshiftsComponent } from './menu/myshifts/myshifts.component';
 import { EditprofileComponent } from './menu/editprofile/editprofile.component';
+import { EditShiftsComponent } from './menu/edit-shifts/edit-shifts.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { EditprofileComponent } from './menu/editprofile/editprofile.component';
     LoginComponent,
     AddshiftComponent,
     MyshiftsComponent,
-    EditprofileComponent
+    EditprofileComponent,
+    EditShiftsComponent
   ],
 
   imports: [
