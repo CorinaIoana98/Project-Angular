@@ -31,7 +31,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 export class AuthService {
   constructor(private firestore: Firestore, private route: Router) {}
 
-  async signup(email, password, fname, lname, isAdmin, shifts) {
+  async signup(email, password, passwordConfirmation, fname, lname, isAdmin, shifts, birthDate) {
     try {
       const auth = getAuth();
       const userCredentials = await createUserWithEmailAndPassword(
@@ -47,21 +47,27 @@ export class AuthService {
         lname,
         email,
         password,
+        passwordConfirmation,
         isAdmin,
         shifts,
+        birthDate
       });
     } catch (err) {
       console.log('error in creating new account');
     }
+    
   }
 
   async login(email, password) {
     try {
       const auth = getAuth();
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password) ;
+      return true;
     } catch (err) {
       console.log('Error logging into the system');
+      return false;
     }
+    //conditie verificare firebase user daca exista
   }
 
   async getCurrentUser() {

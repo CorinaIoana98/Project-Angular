@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Shift } from 'src/app/shift';
+// import { Shift } from 'src/app/shift';
 import { UserServiceFirestoreService } from 'src/app/services/firebase.service';
 @Component({
   selector: 'app-addshift',
@@ -25,7 +25,7 @@ export class AddshiftComponent {
 
   onSubmit() {
     if (this.shiftForm.valid) {
-      let shift: Shift = {
+      let shift: any = {
         shiftName: this.shiftForm.get('shiftName').value,
         startTime: this.shiftForm.get('startTime').value,
         endTime: this.shiftForm.get('endTime').value,

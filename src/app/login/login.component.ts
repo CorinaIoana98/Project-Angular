@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  email: string;
+  password: string;
 
   constructor(private authService: AuthService, private route: Router) {}
 
@@ -24,9 +26,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(
       this.loginForm.value.email,
       this.loginForm.value.password
-    );
+    ).then(result=>{
+      if(result)   this.route.navigate(['/home']);
+      else 
+      { alert("User not found"); }
+    });
     console.log('user logged in');
-    this.route.navigate(['/home']);
-    //Conditie de verificare user / admin
+  
+  
   }
 }
