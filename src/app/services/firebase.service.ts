@@ -16,7 +16,7 @@ import {
   updateDoc,
   where,
 } from '@angular/fire/firestore';
-import { Shift } from '../shift';
+// import { Shift } from '../shift';
 
 @Injectable({
   providedIn: 'root',
