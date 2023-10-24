@@ -9,6 +9,7 @@ import { UserServiceFirestoreService } from '../services/firebase.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  currentUser: any;
   constructor(
     private router: Router,
     private AuthService: AuthService,
@@ -21,7 +22,7 @@ export class HomeComponent implements OnInit {
       });
     });
   }
-  currentUser: any;
+ 
 
   // navigateTo(item: string) {
   //   //Navigatia din menu
