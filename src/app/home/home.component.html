@@ -1,5 +1,5 @@
 <div class="home-container">
-    <p>Hello, {{currentUser.fname}} !</p>
+    <p *ngIf="currentUser">Hello, {{currentUser.fname}} !</p>
     <p>LOGO</p>
     <button (click)="logout()">Logout</button>
 </div>
