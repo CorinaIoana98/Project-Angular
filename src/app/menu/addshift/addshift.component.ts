@@ -19,7 +19,9 @@ export class AddshiftComponent {
       shiftName: [''],
       startTime: [''],
       endTime: [''],
-      priceShifts: [''],
+      wage: [''],
+      place: [''],
+      date: [''],
     });
   }
 
@@ -29,7 +31,9 @@ export class AddshiftComponent {
         shiftName: this.shiftForm.get('shiftName').value,
         startTime: this.shiftForm.get('startTime').value,
         endTime: this.shiftForm.get('endTime').value,
-        priceShifts: this.shiftForm.get('priceShifts').value,
+        wage: this.shiftForm.get('wage').value,
+        place: this.shiftForm.get('place').value,
+        date: this.shiftForm.get('date').value,
       };
       this.fireBase.addNewShift(shift);
       this.shiftForm.reset();
@@ -38,10 +42,10 @@ export class AddshiftComponent {
   async saveShifts() {
     const shifts = {
       shiftName: this.shiftForm.value.shiftName,
-      place: this.shiftForm.value.place,
-      wage: this.shiftForm.value.wage,
       startTime: this.shiftForm.value.startTime,
       endTime: this.shiftForm.value.endTime,
+      wage: this.shiftForm.value.wage,
+      place: this.shiftForm.value.place,
       date: this.shiftForm.value.date,
     };
     (await this.AuthService.addNewShift(shifts)).subscribe(() => {

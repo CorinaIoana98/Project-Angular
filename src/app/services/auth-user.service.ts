@@ -31,7 +31,16 @@ import { onAuthStateChanged } from 'firebase/auth';
 export class AuthService {
   constructor(private firestore: Firestore, private route: Router) {}
 
-  async signup(email, password, passwordConfirmation, fname, lname, isAdmin, shifts, birthDate) {
+  async signup(
+    email,
+    password,
+    passwordConfirmation,
+    fname,
+    lname,
+    isAdmin,
+    shifts,
+    birthDate
+  ) {
     try {
       const auth = getAuth();
       const userCredentials = await createUserWithEmailAndPassword(
@@ -50,18 +59,17 @@ export class AuthService {
         passwordConfirmation,
         isAdmin,
         shifts,
-        birthDate
+        birthDate,
       });
     } catch (err) {
       console.log('error in creating new account');
     }
-    
   }
 
   async login(email, password) {
     try {
       const auth = getAuth();
-      await signInWithEmailAndPassword(auth, email, password) ;
+      await signInWithEmailAndPassword(auth, email, password);
       return true;
     } catch (err) {
       console.log('Error logging into the system');
@@ -125,6 +133,25 @@ export class AuthService {
           observer.next(userData['shifts']);
         }
       });
+    });
+  }
+
+  async deleteShifts(shift_Name) {
+    const auth = getAuth();
+    return new Observable((observer) => {
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          const userDocRef = doc(this.firestore, 'users', user.uid);
+          const userDoc = getDoc(userDocRef);
+          const userData = (await userDoc).data();
+          const shiftIndex = userData['shifts'].findIndex(
+            (element) => element.shiftName === shift_Name
+          );
+          userData['shifts'].splice(shiftIndex, 1);
+          updateDoc(userDocRef, { shifts: userData['shifts'] });
+        }
+      });
+      observer.next(userData['shifts']);
     });
   }
 }

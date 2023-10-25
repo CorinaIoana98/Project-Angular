@@ -15,4 +15,10 @@ export class EditShiftsComponent implements OnInit {
       console.log(this.shifts);
     });
   }
+  async deleteShifts(shift_Name) {
+    (await this.authService.deleteShifts(shift_Name)).subscribe((data) => {
+      console.log('shift deleted');
+      this.shifts = data;
+    });
+  }
 }
