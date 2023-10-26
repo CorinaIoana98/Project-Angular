@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 // import { Shift } from 'src/app/shift';
 import { UserServiceFirestoreService } from 'src/app/services/firebase.service';
 @Component({
@@ -8,15 +13,20 @@ import { UserServiceFirestoreService } from 'src/app/services/firebase.service';
   styleUrls: ['./addshift.component.css'],
 })
 export class AddshiftComponent {
-  shiftForm: FormGroup;
+  shiftForm: any;
   AuthService: any;
+  // ngOnInit() {
+  //   this.shiftForm = new FormGroup({
+  //     shiftName: new FormControl(new Date().getTime()),
+  //   });
+  // }
 
   constructor(
     private formBuilder: FormBuilder,
     private fireBase: UserServiceFirestoreService
   ) {
     this.shiftForm = this.formBuilder.group({
-      shiftName: [''],
+      shiftName: [new Date().getTime()],
       startTime: [''],
       endTime: [''],
       wage: [''],

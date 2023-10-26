@@ -32,7 +32,7 @@ import { EditShiftsComponent } from './menu/edit-shifts/edit-shifts.component';
     AddshiftComponent,
     MyshiftsComponent,
     EditprofileComponent,
-    EditShiftsComponent
+    EditShiftsComponent,
   ],
 
   imports: [
