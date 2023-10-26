@@ -29,6 +29,7 @@ import { onAuthStateChanged } from 'firebase/auth';
   providedIn: 'root',
 })
 export class AuthService {
+  shifts: any;
   constructor(private firestore: Firestore, private route: Router) {}
 
   async signup(
@@ -138,6 +139,8 @@ export class AuthService {
 
   async deleteShifts(shift_Name) {
     const auth = getAuth();
+    let userData: any;
+    // this.shifts = [];
     return new Observable((observer) => {
       auth.onAuthStateChanged(async (user) => {
         if (user) {
@@ -149,9 +152,9 @@ export class AuthService {
           );
           userData['shifts'].splice(shiftIndex, 1);
           updateDoc(userDocRef, { shifts: userData['shifts'] });
+          observer.next(userData['shifts']);
         }
       });
-      observer.next(userData['shifts']);
     });
   }
 }

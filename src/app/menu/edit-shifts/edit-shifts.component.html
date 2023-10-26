@@ -16,7 +16,7 @@
       <td>{{ shift.wage }}</td>
       <td>{{ shift.place }}</td>
       <td>{{ shift.date }}</td>
-      <td><button>Edit Shift</button></td>
+      <td><button (click)="editShift(shift)">Edit Shift</button></td>
       <td>
         <button (click)="deleteShifts(shift.shiftName)">Delete Shift</button>
       </td>
