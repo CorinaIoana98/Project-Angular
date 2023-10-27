@@ -8,6 +8,7 @@ import { AuthService } from './services/auth-user.service';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { EditShiftsComponent } from './menu/edit-shifts/edit-shifts.component';
 import { AllShiftsComponent } from './menu/all-shifts/all-shifts.component';
+import { MyshiftsComponent } from './menu/myshifts/myshifts.component';
 
 const routes: Routes = [
   { path: '', component: RegisterComponent },
@@ -16,8 +17,9 @@ const routes: Routes = [
   { path: 'user', component: AuthService },
   { path: 'home-admin', component: HomeAdminComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'edit-shifts', component: EditShiftsComponent },
-  {path: 'all-shifts', component:AllShiftsComponent}
+  { path: 'myshifts', component: MyshiftsComponent },
+  { path: 'editShift/:id', component: EditShiftsComponent },
+  { path: 'all-shifts', component: AllShiftsComponent },
 ];
 
 @NgModule({
