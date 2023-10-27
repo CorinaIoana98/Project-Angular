@@ -76,7 +76,23 @@ export class AuthService {
       console.log('Error logging into the system');
       return false;
     }
-    //conditie verificare firebase user daca exista
+  }
+
+  async isUserAdmin(): Promise<boolean> {
+    const auth = getAuth();
+    const user = auth.currentUser;
+  
+    if (user) {
+      const userDocRef = doc(this.firestore, 'users', user.uid);
+      const userDoc = await getDoc(userDocRef);
+  
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        return userData['isAdmin'] === true;
+      }
+    }
+  
+    return false; // User not found or not an admin
   }
 
   async getCurrentUser() {
@@ -157,4 +173,7 @@ export class AuthService {
       });
     });
   }
+
+
+
 }

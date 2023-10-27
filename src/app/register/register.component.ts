@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
 import {
   FormControl,
   FormGroup,
@@ -21,7 +23,7 @@ export class RegisterComponent implements OnInit {
   password: string;
   registerForm: FormGroup;
 
-  constructor(private authService: AuthService, private route: Router) {}
+  constructor(private authService: AuthService, private route: Router,private toastr: ToastrService ) {}
 
   //  ageRangeValidator(minAge: number, maxAge: number): Validators {
   //   return (control: AbstractControl): { [key: string]: boolean } | null => {
@@ -44,12 +46,12 @@ export class RegisterComponent implements OnInit {
       fname: new FormControl('', [
         Validators.required,
         Validators.minLength(2),
-        Validators.pattern('/^[a-zA-Zs]*$/'),
+        // Validators.pattern('/^[a-zA-Zs]*$/'),
       ]),
       lname: new FormControl('', [
         Validators.required,
         Validators.minLength(2),
-        Validators.pattern('/^[a-zA-Zs]*$/'),
+        // Validators.pattern('/^[a-zA-Zs]*$/'),
       ]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -67,33 +69,40 @@ export class RegisterComponent implements OnInit {
   }
 
   async register() {
-    const {
-      fname,
-      lname,
-      email,
-      password,
-      passwordConfirmation,
-      isAdmin,
-      shifts,
-      birthDate,
-    } = this.registerForm.value;
-    this.authService
-      .signup(
+    if(this.registerForm.valid)
+    {
+      const {
+        fname,
+        lname,
         email,
         password,
         passwordConfirmation,
-        fname,
-        lname,
         isAdmin,
         shifts,
-        birthDate
-      )
-      .then(() => {
-        console.log('users added from register');
-        this.route.navigate(['/login']);
-      })
-      .catch((err) => {
-        console.error('Error adding user:', err);
-      });
-  }
+        birthDate,
+      } = this.registerForm.value;
+      this.authService
+        .signup(
+          email,
+          password,
+          passwordConfirmation,
+          fname,
+          lname,
+          isAdmin,
+          shifts,
+          birthDate
+        )
+        .then(() => {
+          console.log('users added from register');
+          this.route.navigate(['/login']);
+        })
+        .catch((err) => {
+          console.error('Error adding user:', err);
+        });
+    } 
+    // else 
+    //   this.toastr.error("Please complete all the fields!")
+    
+    }
+    
 }

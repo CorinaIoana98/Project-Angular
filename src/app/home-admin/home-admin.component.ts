@@ -27,20 +27,10 @@ export class HomeAdminComponent {
     this.router.navigate(['/login']);
   }
 
-  // onOptionSelected() {
-  //   if (this.selectedOption === 'allShift') {
-  //     this.shiftsButton();
-  //   } else if (this.selectedOption === 'allWorkers') {
-  //     this.workersButton();
-  //   }
-  // }
-  // shiftsButton() {
-  //   this.router.navigate(['/shiftsPage'])
-  // }
-  // workersButton() {
-  //   this.router.navigate(['/allWorkers'])
-  // }
-  toggleAllShift(){}
+  shifts:any;
+  toggleAllShift(){
+    
+  }
   toggleaAllWorkers(){}
   
 }

@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
     this.showEditProfile = !this.showEditProfile;
   }
   showMyshifts: boolean = false;
+  
   toggleMyshifts() {
     this.showMyshifts = !this.showMyshifts;
   }

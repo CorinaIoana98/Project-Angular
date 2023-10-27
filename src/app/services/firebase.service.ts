@@ -56,7 +56,6 @@ export class UserServiceFirestoreService {
   }
   
   async addNewShift(shift) {
-    console.log("adsgdf");
     const auth = getAuth();
     console.log(auth);
 

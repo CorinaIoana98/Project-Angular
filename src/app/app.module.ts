@@ -21,6 +21,10 @@ import { AddshiftComponent } from './menu/addshift/addshift.component';
 import { MyshiftsComponent } from './menu/myshifts/myshifts.component';
 import { EditprofileComponent } from './menu/editprofile/editprofile.component';
 import { EditShiftsComponent } from './menu/edit-shifts/edit-shifts.component';
+import { ToastrService } from 'ngx-toastr';
+import { AllShiftsComponent } from './menu/all-shifts/all-shifts.component';
+import { AllWorkersComponent } from './menu/all-workers/all-workers.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +37,8 @@ import { EditShiftsComponent } from './menu/edit-shifts/edit-shifts.component';
     MyshiftsComponent,
     EditprofileComponent,
     EditShiftsComponent,
+    AllShiftsComponent,
+    AllWorkersComponent
   ],
 
   imports: [
@@ -43,7 +49,7 @@ import { EditShiftsComponent } from './menu/edit-shifts/edit-shifts.component';
     ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
-    ToastrModule,
+    ToastrModule, BrowserModule,BrowserAnimationsModule, ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
