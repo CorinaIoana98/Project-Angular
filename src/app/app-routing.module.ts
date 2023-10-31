@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'home-admin', component: HomeAdminComponent },
   { path: 'home', component: HomeComponent },
   { path: 'myshifts', component: MyshiftsComponent },
-  { path: 'editShift/:id', component: EditShiftsComponent },
+  { path: 'edit-shifts/:id', component: EditShiftsComponent },
   { path: 'all-shifts', component: AllShiftsComponent },
 ];
 
