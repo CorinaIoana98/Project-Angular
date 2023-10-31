@@ -6,4 +6,6 @@ import { AuthService } from 'src/app/services/auth-user.service';
   templateUrl: './edit-shifts.component.html',
   styleUrls: ['./edit-shifts.component.css'],
 })
-export class EditShiftsComponent {}
+export class EditShiftsComponent {
+  shifts: any;
+}
