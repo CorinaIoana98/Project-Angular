@@ -1,0 +1,28 @@
+<div>
+    <table>
+        <th>User:</th>
+        <th>Shift Name:</th>
+        <th>Start Shift:</th>
+        <th>End Shift:</th>
+        <th>Wage:</th>
+        <th>Place Shifts:</th>
+        <th>Date Shift:</th>
+
+
+        <tr *ngFor="let shift of shifts">
+            <td>{{ shift.fname }}</td>
+            <td>{{ shift.shiftName }}</td>
+            <td>{{ shift.startTime }}</td>
+            <td>{{ shift.endTime }}</td>
+            <td>{{ shift.wage }}</td>
+            <td>{{ shift.place }}</td>
+            <td>{{ shift.date }}</td>
+            <td>
+                <button routerLink="editShift{{shift.id}}">Edit Shift</button>
+            </td>
+            <td>
+                <button (click)="deleteShifts(shift.shiftName)">Delete Shift</button>
+            </td>
+        </tr>
+    </table>
+</div>

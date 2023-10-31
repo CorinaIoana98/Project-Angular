@@ -9,13 +9,17 @@
 <div class="menu">
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="toggleAllShift()">All Shifts</button>
-        <button mat-menu-item (click)="toggleaAllWorkers()">All workers</button>
+        <button mat-menu-item (click)="toggleAllWorkers()">All workers</button>
     </mat-menu>
 
     <button mat-button [matMenuTriggerFor]="menu">Open Menu</button>
 </div>
-
-
+<ng-container *ngIf="showAllshifts">
+    <app-all-shifts></app-all-shifts>
+</ng-container>
+<ng-container *ngIf="showAllWorkers">
+    <app-all-workers></app-all-workers>
+</ng-container>
 
 <body>
 

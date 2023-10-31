@@ -28,9 +28,17 @@ export class HomeAdminComponent {
   }
 
   shifts:any;
+  showAllshifts: boolean = false;
   toggleAllShift(){
+    // console.log('dadssfasf')
+    this.showAllshifts = !this.showAllshifts;
+
     
   }
-  toggleaAllWorkers(){}
+
+  showAllWorkers: boolean = false;
+  toggleAllWorkers(){
+    this.showAllWorkers = !this.showAllWorkers;
+  }
   
 }

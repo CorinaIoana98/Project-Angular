@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-// import { Observable } from 'rxjs';
 import { Observable } from 'rxjs';
 
 import {
@@ -23,7 +22,9 @@ import {
   updateDoc,
   where,
 } from '@angular/fire/firestore';
-import { onAuthStateChanged } from 'firebase/auth';
+import { Auth, onAuthStateChanged } from 'firebase/auth';
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -175,5 +176,40 @@ export class AuthService {
   }
 
 
+async getAllShifts() {
+  const usersCollection = collection(this.firestore, 'users');
+  const usersQuery = query(usersCollection);
+  const userDocs = await getDocs(usersQuery);
+
+  const allShifts = [];
+
+  userDocs.forEach((userDoc) => {
+    const userData = userDoc.data();
+    if (userData['shifts']) {
+   
+      allShifts.push({
+        fname: userData['fname'],
+        shifts: userData['shifts'],
+      });
+    }
+  });
+
+  return allShifts;
+}
+
+
+async getAllWorkers(){
+  const userCollection = collection(this.firestore, 'users');
+  const usersQuery = query(userCollection);
+  const userDocs = await getDocs(usersQuery);
+  const usersInfo = userDocs.docs.map((document) => ({
+    name: document.data()['fname'], 
+    email: document.data()['email'], 
+    uid: document.id,
+  }));
+console.log(usersInfo);
+  return usersInfo;
+}
 
 }
+
