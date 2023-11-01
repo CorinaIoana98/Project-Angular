@@ -193,7 +193,7 @@ async getAllShifts() {
       });
     }
   });
-
+console.log(allShifts)
   return allShifts;
 }
 
@@ -202,14 +202,33 @@ async getAllWorkers(){
   const userCollection = collection(this.firestore, 'users');
   const usersQuery = query(userCollection);
   const userDocs = await getDocs(usersQuery);
-  const usersInfo = userDocs.docs.map((document) => ({
-    name: document.data()['fname'], 
-    email: document.data()['email'], 
-    uid: document.id,
-  }));
-console.log(usersInfo);
-  return usersInfo;
+  
+  const allWorkers=[];
+  userDocs.forEach((userDoc)=>{
+    const userData=userDoc.data();
+    if(userData['isAdmin']==false){
+      allWorkers.push({
+        // uid:userData['uid'],
+        fname:userData['fname'],
+        lname:userData['lname'],
+        email:userData['email']
+      })
+    }
+    
+  })
+  console.log(allWorkers);
+return allWorkers;
+
+  // const usersInfo = userDocs.docs.map((document) => ({
+  //   name: document.data()['fname'], 
+  //   email: document.data()['email'], 
+  //   uid: document.id,
+  //   lname: document.data()['lname']
+  // }));
+// console.log(usersInfo);
+//   return usersInfo;
 }
+
 
 }
 

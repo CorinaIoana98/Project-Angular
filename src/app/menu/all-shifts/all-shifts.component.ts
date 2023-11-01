@@ -12,15 +12,23 @@ export class AllShiftsComponent {
 
   allShifts:any;
   shifts=[];
+  users=[];
+  allUsers:any;
+
+  // async ngOnInit(): Promise<void> {
+  //  this.authService.getAllShifts().then((data: Array<any>) => {
+  //     this.shifts = data;
+  //     console.log(this.shifts);
+  //   });
+  // }
 
   async ngOnInit():Promise<void>{
-
 this.authService.getAllShifts().then((result)=>{
   for(let user of result){
     if(user.shifts){
       for(let shifts of user.shifts){
-        this.shifts.push(shifts);
-        this.shifts.push(user);
+        this.shifts.push(shifts,user);
+        // this.shifts.push(user);
       }
     }
   }

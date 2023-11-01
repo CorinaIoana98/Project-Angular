@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserServiceFirestoreService } from '../services/firebase.service';
 import { UserServiceService } from '../services/user-service.service';
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home-admin',
@@ -10,6 +11,7 @@ import { UserServiceService } from '../services/user-service.service';
   styleUrls: ['./home-admin.component.css']
 })
 export class HomeAdminComponent {
+  personWithMostShifts: any;
   constructor( private router: Router, private AuthService: AuthService ){
     this.AuthService.getCurrentUser().then(observable=>{
       observable.subscribe(data=>{
@@ -39,6 +41,25 @@ export class HomeAdminComponent {
   showAllWorkers: boolean = false;
   toggleAllWorkers(){
     this.showAllWorkers = !this.showAllWorkers;
+  }
+
+  ngOnInit():void{
+    this.AuthService.getAllShifts().then((users:any[])=>{
+      let maxShiftCount = 0;
+      let personWithMostShifts = null;
+  
+      users.forEach((user) => {
+        const data = user.payload.doc.data();
+        const id = user.payload.doc.id;
+  
+        if (data.shifts && data.shifts.length > maxShiftCount) {
+          maxShiftCount = data.shifts.length;
+          personWithMostShifts = { id, ...data };
+        }
+      });  
+      this.personWithMostShifts = personWithMostShifts;
+      console.log(personWithMostShifts);
+    });
   }
   
 }
