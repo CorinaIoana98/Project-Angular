@@ -7,21 +7,22 @@ import { AuthService } from 'src/app/services/auth-user.service';
   styleUrls: ['./all-workers.component.css']
 })
 export class AllWorkersComponent {
-  users=[];
+  users;
   // workers=[];
   constructor(private authService: AuthService) {}
 
   async ngOnInit():Promise<void>{
     
     this.authService.getAllWorkers().then((result)=>{
-for(let user of result){
-  if(user.uid){
-for(let users of user.uid){
-  this.users.push(users);
-  this.users.push(user);
-}
-  }
-}
+// for(let user of result){
+//   if(user.uid){
+// for(let users of user.uid){
+//   this.users.push(users);
+//   this.users.push(user);
+// }
+//   }
+// }
+this.users = result
     })
       }
 }

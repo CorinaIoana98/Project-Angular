@@ -45,20 +45,23 @@ export class HomeAdminComponent {
 
   ngOnInit():void{
     this.AuthService.getAllShifts().then((users:any[])=>{
-      let maxShiftCount = 0;
-      let personWithMostShifts = null;
+      let maxShiftCount = -1;
+      let personWithMostShifts = [];
   
       users.forEach((user) => {
-        const data = user.payload.doc.data();
-        const id = user.payload.doc.id;
-  
-        if (data.shifts && data.shifts.length > maxShiftCount) {
-          maxShiftCount = data.shifts.length;
-          personWithMostShifts = { id, ...data };
+        // const data = user.data();
+        // const id = user.id;
+        // console.log(data, id)
+        if (user.shifts && user.shifts.length >= maxShiftCount) {
+          maxShiftCount = user.shifts.length;
+          personWithMostShifts.push(user);
         }
+        // console.log(personWithMostShifts)
+        // personWithMostShifts.push(personWithMostShifts);
       });  
+      
       this.personWithMostShifts = personWithMostShifts;
-      console.log(personWithMostShifts);
+      console.log(this.personWithMostShifts)
     });
   }
   

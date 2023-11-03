@@ -181,20 +181,25 @@ async getAllShifts() {
   const usersQuery = query(usersCollection);
   const userDocs = await getDocs(usersQuery);
 
-  const allShifts = [];
-
-  userDocs.forEach((userDoc) => {
-    const userData = userDoc.data();
-    if (userData['shifts']) {
+  // const allShifts = [];
+  // userDocs.forEach((userDoc) => {
+  //   const userData = userDoc.data();
+  //   if (userData['shifts']) {
    
-      allShifts.push({
-        fname: userData['fname'],
-        shifts: userData['shifts'],
-      });
-    }
-  });
-console.log(allShifts)
-  return allShifts;
+  //     allShifts.push({
+  //       fname: userData['fname'],
+  //       shifts: userData['shifts'],
+  //     });
+  //   }
+  // });
+
+  const usersInfo = userDocs.docs
+    .map((document) => ({
+      ...document.data(),
+      
+    }))
+console.log(usersInfo)
+  return usersInfo;
 }
 
 
@@ -219,16 +224,12 @@ async getAllWorkers(){
   console.log(allWorkers);
 return allWorkers;
 
-  // const usersInfo = userDocs.docs.map((document) => ({
-  //   name: document.data()['fname'], 
-  //   email: document.data()['email'], 
-  //   uid: document.id,
-  //   lname: document.data()['lname']
-  // }));
-// console.log(usersInfo);
-//   return usersInfo;
 }
 
+// getPersons() {
+//   let usersRef = db.collection('users');
+//   return this.firestore.collection('users').valueChanges();
+// }
 
 }
 

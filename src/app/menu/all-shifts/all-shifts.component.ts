@@ -24,14 +24,15 @@ export class AllShiftsComponent {
 
   async ngOnInit():Promise<void>{
 this.authService.getAllShifts().then((result)=>{
-  for(let user of result){
-    if(user.shifts){
-      for(let shifts of user.shifts){
-        this.shifts.push(shifts,user);
-        // this.shifts.push(user);
-      }
-    }
-  }
+  // for(let user of result){
+  //   if(user.shifts){
+  //     for(let shifts of user.shifts){
+  //       this.shifts.push(shifts,user);
+  //       // this.shifts.push(user);
+  //     }
+  //   }
+  // }
+  this.shifts = result
 })
   }
   

@@ -12,12 +12,18 @@
 
         <tr *ngFor="let shift of shifts">
             <td>{{ shift.fname }}</td>
-            <td>{{ shift.shiftName }}</td>
-            <td>{{ shift.startTime }}</td>
-            <td>{{ shift.endTime }}</td>
-            <td>{{ shift.wage }}</td>
-            <td>{{ shift.place }}</td>
-            <td>{{ shift.date }}</td>
+            <td>
+                <table>
+                    <tr *ngFor="let el of shift.shifts">
+                        <td>{{el.shiftName}}</td>
+                        <td>{{el.startTime}}</td>
+                        <td>{{el.endTime}}</td>
+                        <td>{{el.wage}}</td>
+                        <td>{{el.place}}</td>
+                        <td>{{el.date}}</td>
+                    </tr>
+                </table>
+            </td>
             <td>
                 <button routerLink="editShift{{shift.id}}">Edit Shift</button>
             </td>
