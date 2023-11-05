@@ -43,7 +43,9 @@ export class AddshiftComponent {
         endTime: this.shiftForm.get('endTime').value,
         wage: this.shiftForm.get('wage').value,
         place: this.shiftForm.get('place').value,
-        date: this.shiftForm.get('date').value,
+        date: new Date(this.shiftForm.get('date').value).toLocaleString(
+          'en-US'
+        ),
       };
       this.fireBase.addNewShift(shift);
       this.shiftForm.reset();

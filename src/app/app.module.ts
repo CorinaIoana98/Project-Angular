@@ -25,7 +25,6 @@ import { ToastrService } from 'ngx-toastr';
 import { AllShiftsComponent } from './menu/all-shifts/all-shifts.component';
 import { AllWorkersComponent } from './menu/all-workers/all-workers.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +37,7 @@ import { AllWorkersComponent } from './menu/all-workers/all-workers.component';
     EditprofileComponent,
     EditShiftsComponent,
     AllShiftsComponent,
-    AllWorkersComponent
+    AllWorkersComponent,
   ],
 
   imports: [
@@ -49,7 +48,10 @@ import { AllWorkersComponent } from './menu/all-workers/all-workers.component';
     ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
-    ToastrModule, BrowserModule,BrowserAnimationsModule, ToastrModule.forRoot(),
+    ToastrModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
