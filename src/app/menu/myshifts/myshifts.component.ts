@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth-user.service';
 })
 export class MyshiftsComponent implements OnInit {
   shifts = [];
+
   displayedColumns = [
     'shiftName',
     'startShift',
