@@ -28,7 +28,7 @@
   </table>
 </div> -->
 
-<table mat-table [dataSource]="shifts" class="mat-elevation-z8">
+<table mat-table [dataSource]="shifts" class="mat-elevation-z8" matSort>
   <!-- Shift Name Column -->
   <ng-container matColumnDef="shiftName">
     <th mat-header-cell *matHeaderCellDef>Shift Name</th>
@@ -48,7 +48,7 @@
   </ng-container>
 
   <!--Wage Shift-->
-  <ng-container matColumnDef="wage">
+  <ng-container matSort matColumnDef="wage">
     <th mat-header-cell *matHeaderCellDef>Wage</th>
     <td mat-cell *matCellDef="let shift">{{ shift.wage }}</td>
     <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header="wage">Wage</th>

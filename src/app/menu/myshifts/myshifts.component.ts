@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth-user.service';
+import { MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-myshifts',
