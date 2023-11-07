@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth-user.service';
 
 @Component({
@@ -7,22 +8,21 @@ import { AuthService } from 'src/app/services/auth-user.service';
   styleUrls: ['./all-workers.component.css']
 })
 export class AllWorkersComponent {
-  users;
+  // users;
   // workers=[];
+  users: MatTableDataSource<any>;
   constructor(private authService: AuthService) {}
 
-  async ngOnInit():Promise<void>{
-    
-    this.authService.getAllWorkers().then((result)=>{
-// for(let user of result){
-//   if(user.uid){
-// for(let users of user.uid){
-//   this.users.push(users);
-//   this.users.push(user);
-// }
-//   }
-// }
-this.users = result
-    })
-      }
+
+  ngOnInit() {
+    this.authService.getAllWorkers().then((data) => {
+      this.users = new MatTableDataSource(data);
+    });
+  }
+
+//   async ngOnInit():Promise<void>{
+//     this.authService.getAllWorkers().then((result)=>{
+// this.users = result
+//     })
+//       }
 }

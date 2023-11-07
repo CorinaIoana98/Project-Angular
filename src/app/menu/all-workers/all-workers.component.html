@@ -1,15 +1,22 @@
+<br><br>
+<hr>
+<h1>All workers registered</h1>
 <div>
-    <table class="allWorkersTabel">
-        <!-- <th>Uid:</th> -->
-        <th>First name:</th>
-        <th>Last name:</th>
-        <th>email:</th>
+    <mat-table [dataSource]="users">
+        <ng-container matColumnDef="fname">
+            <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+            <mat-cell *matCellDef="let user">{{ user.fname }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="lname">
+            <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+            <mat-cell *matCellDef="let user">{{ user.lname }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+            <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
+        </ng-container>
 
-        <tr *ngFor="let user of users">
-            <!-- <td>{{ user.uid }}</td> -->
-            <td>{{ user.fname }}</td>
-            <td>{{ user.lname }}</td>
-            <td>{{ user.email }}</td>
-        </tr>
-    </table>
+        <mat-header-row *matHeaderRowDef="['fname', 'lname', 'email']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['fname', 'lname', 'email']"></mat-row>
+    </mat-table>
 </div>

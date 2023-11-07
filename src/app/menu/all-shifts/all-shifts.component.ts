@@ -11,47 +11,49 @@ export class AllShiftsComponent {
   constructor(private authService: AuthService) {}
 
   allShifts:any;
-  shifts=[];
+  // shifts=[];
   users=[];
   allUsers:any;
-
-  // async ngOnInit(): Promise<void> {
-  //  this.authService.getAllShifts().then((data: Array<any>) => {
-  //     this.shifts = data;
-  //     console.log(this.shifts);
-  //   });
-  // }
+  shifts: any[] = [];
+  searchName: string = '';
+  searchStartDate: Date;
+  searchEndDate: Date;
+  searchPlace: string = '';
 
   async ngOnInit():Promise<void>{
 this.authService.getAllShifts().then((result)=>{
-  // for(let user of result){
-  //   if(user.shifts){
-  //     for(let shifts of user.shifts){
-  //       this.shifts.push(shifts,user);
-  //       // this.shifts.push(user);
-  //     }
-  //   }
-  // }
-  this.shifts = result
+    this.shifts = result;
 })
   }
-  
 
-  editShift(){ }
-   async deleteShifts(shift_Name) {
-    (await this.authService.deleteShifts(shift_Name)).subscribe((data) => {
-      if (Array.isArray(data)) {
-        console.log('Shift deleted');
-        this.shifts = data;
-      } else {
-        console.error('Invalid data received:', data);
-      }
-    });
+  isShiftVisible(shift: any): boolean {
+    const isNameMatch = !this.searchName || shift.shiftName.includes(this.searchName);
+    const isStartDateMatch = !this.searchStartDate || new Date(shift.date) >= new Date(this.searchStartDate);
+    const isEndDateMatch = !this.searchEndDate || new Date(shift.date) <= new Date(this.searchEndDate);
+    const isPlaceMatch = !this.searchPlace || shift.place.includes(this.searchPlace);
+    // if(isNameMatch && isStartDateMatch && isEndDateMatch && isPlaceMatch )
+    return isNameMatch && isStartDateMatch && isEndDateMatch && isPlaceMatch;
+  }
+  
+  performSearch() {
+     // usersInfo=usersInfo.filter(user => user['shifts'] && user['shifts'].length > 0);
+    this.authService
+      .searchShifts(this.searchName, this.searchStartDate, this.searchEndDate, this.searchPlace)
+      .then((querySnapshot) => {
+
+        this.shifts = querySnapshot.docs.map((doc) => doc.data());
+      });
+   
+      // this.shifts=this.shifts.filter()
   }
 
-  // deleteShifts(shift_Name){
-  //   this.AuthService.deleteShifts(shift_Name);
+  // shifts: MatTableDataSource<any>;
+  // ngOnInit() {
+  //   this.yourService.getShiftData().then((data) => {
+  //     this.shifts = new MatTableDataSource(data);
+  //   });
   // }
+
 }
 
 
