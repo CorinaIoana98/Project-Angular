@@ -8,6 +8,18 @@ import { AuthService } from 'src/app/services/auth-user.service';
 })
 export class MyshiftsComponent implements OnInit {
   shifts = [];
+
+  displayedColumns = [
+    'shiftName',
+    'startShift',
+    'endShift',
+    'wage',
+    'place',
+    'date',
+    'editShift',
+    'deleteShift',
+  ];
+
   constructor(private authService: AuthService) {}
   async ngOnInit(): Promise<void> {
     (await this.authService.getEditShifts()).subscribe((data: Array<any>) => {

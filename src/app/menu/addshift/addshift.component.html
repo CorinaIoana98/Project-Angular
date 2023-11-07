@@ -1,5 +1,5 @@
 <h2>Add Shift</h2>
-<form [formGroup]="shiftForm" (ngSubmit)="onSubmit()">
+<form class="add-shift-form" [formGroup]="shiftForm" (ngSubmit)="onSubmit()">
   <mat-form-field>
     <input matInput formControlName="shiftName" placeholder="Shift Id" />
   </mat-form-field>
@@ -24,21 +24,22 @@
   <mat-form-field>
     <input matInput type="number" formControlName="wage" placeholder="wage" />
   </mat-form-field>
+
   <mat-form-field>
-    <input
-      matInput
-      type="string"
-      formControlName="place"
-      placeholder="Place of Shift"
-    />
+    <mat-label>Add Place</mat-label>
+    <mat-select formControlName="place">
+      <mat-option value="Brasov">Brasov</mat-option>
+      <mat-option value="Bucuresti">Bucuresti</mat-option>
+      <mat-option value="Oradea">Oradea</mat-option>
+    </mat-select>
   </mat-form-field>
+
   <mat-form-field>
-    <input
-      matInput
-      type="date"
-      formControlName="date"
-      placeholder="Date of shift"
-    />
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date" />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit">Add Shift</button>
