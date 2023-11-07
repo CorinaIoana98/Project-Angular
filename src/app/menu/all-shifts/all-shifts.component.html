@@ -1,35 +1,125 @@
-<div>
+<!-- <div>
+    <input [(ngModel)]="searchName" placeholder="Name">
+    <input [(ngModel)]="searchStartDate" type="date" placeholder="Start Date">
+    <input [(ngModel)]="searchEndDate" type="date" placeholder="End Date">
+    <input [(ngModel)]="searchPlace" placeholder="Place">
+    <button (click)="performSearch()">Search</button>
+
     <table>
         <tr>
             <th>User:</th>
-            <th>Shift Name:</th>
-            <th>Start Shift:</th>
-            <th>End Shift:</th>
-            <th>Wage:</th>
-            <th>Place Shifts:</th>
-            <th>Date Shift:</th>
         </tr>
-
         <tr *ngFor="let shift of shifts">
             <td>{{ shift.fname }}</td>
             <td>
                 <table>
-                    <tr *ngFor="let el of shift.shifts">
-                        <td>{{el.shiftName}}</td>
-                        <td>{{el.startTime}}</td>
-                        <td>{{el.endTime}}</td>
-                        <td>{{el.wage}}</td>
-                        <td>{{el.place}}</td>
-                        <td>{{el.date}}</td>
+                    <tr>
+                        <th>Shift Name:</th>
+                        <th>Start Shift:</th>
+                        <th>End Shift:</th>
+                        <th>Wage:</th>
+                        <th>Place Shifts:</th>
+                        <th>Date Shift:</th>
                     </tr>
+                    <ng-container *ngIf="shift.shifts && shift.shifts.length > 0">
+                        <tr *ngFor="let el of shift.shifts">
+                            <td>{{ el.shiftName }}</td>
+                            <td>{{ el.startTime }}</td>
+                            <td>{{ el.endTime }}</td>
+                            <td>{{ el.wage }}</td>
+                            <td>{{ el.place }}</td>
+                            <td>{{ el.date }}</td>
+                        </tr>
+                    </ng-container>
                 </table>
-            </td>
-            <td>
-                <button routerLink="editShift{{shift.id}}">Edit Shift</button>
-            </td>
-            <td>
-                <button (click)="deleteShifts(shift.shiftName)">Delete Shift</button>
             </td>
         </tr>
     </table>
 </div>
+ -->
+
+<div>
+
+    <input [(ngModel)]="searchName" placeholder="Name">
+    <input [(ngModel)]="searchStartDate" type="date" placeholder="Start Date">
+    <input [(ngModel)]="searchEndDate" type="date" placeholder="End Date">
+    <input [(ngModel)]="searchPlace" placeholder="Place">
+    <button (click)="performSearch()">Search</button>
+    <table>
+        <thead>
+            <tr>
+                <th>User:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let shift of shifts">
+                <td>{{ shift.fname }}</td>
+                <td>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Shift Name</th>
+                                <th>Start Shift</th>
+                                <th>End Shift</th>
+                                <th>Wage</th>
+                                <th>Place Shifts</th>
+                                <th>Date Shift</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let el of shift.shifts">
+                                <tr *ngIf="isShiftVisible(el)">
+                                    <td>{{ el.shiftName }}</td>
+                                    <td>{{ el.startTime }}</td>
+                                    <td>{{ el.endTime }}</td>
+                                    <td>{{ el.wage }}</td>
+                                    <td>{{ el.place }}</td>
+                                    <td>{{ el.date }}</td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- home.component.html
+<mat-table [dataSource]="shifts">
+    <ng-container matColumnDef="user">
+        <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
+        <mat-cell *matCellDef="let shift">{{ shift.fname }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="shifts">
+        <mat-cell *matCellDef="let shift">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shift Name</th>
+                        <th>Start Shift</th>
+                        <th>End Shift</th>
+                        <th>Wage</th>
+                        <th>Place Shifts</th>
+                        <th>Date Shift</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let el of shift.shifts">
+                    <tr>
+                        <td>{{ el.shiftName }}</td>
+                        <td>{{ el.startTime }}</td>
+                        <td>{{ el.endTime }}</td>
+                        <td>{{ el.wage }}</td>
+                        <td>{{ el.place }}</td>
+                        <td>{{ el.date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['user', 'shifts']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['user', 'shifts']"></mat-row>
+</mat-table> -->

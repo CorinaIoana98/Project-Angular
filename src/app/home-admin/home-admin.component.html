@@ -1,33 +1,51 @@
-<div class="home-container">
-    <p *ngIf="currentUser">Hello, {{currentUser.fname}} !</p>
-
-    <p>LOGO</p>
-
-    <button (click)="logout()">Logout</button>
-</div>
-
-<div class="menu">
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="toggleAllShift()">All Shifts</button>
-        <button mat-menu-item (click)="toggleAllWorkers()">All workers</button>
-    </mat-menu>
-
-    <button mat-button [matMenuTriggerFor]="menu">Open Menu</button>
-</div>
-<ng-container *ngIf="showAllshifts">
-    <app-all-shifts></app-all-shifts>
-</ng-container>
-<ng-container *ngIf="showAllWorkers">
-    <app-all-workers></app-all-workers>
-</ng-container>
-
-
-<div *ngFor="let el of personWithMostShifts">
-    <p>
-        {{el.fname}}
-    </p>
-</div>
-
 <body>
+    <div class="home-container">
+        <p *ngIf="currentUser">Hello, {{currentUser.fname}} !</p>
+
+        <p>LOGO</p>
+
+        <button (click)="logout()">Logout</button>
+    </div>
+
+    <div class="menu">
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="toggleAllShift()">All Shifts</button>
+            <button mat-menu-item (click)="toggleAllWorkers()">All workers</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="menu">Open Menu</button>
+    </div>
+
+    <div *ngFor="let el of bestWorker" class="bestWorker">
+        <h1>Worker with most shifts</h1>
+        <p class="worker">
+            {{el.fname}}
+        </p>
+    </div>
+    <div class="lassWeekShifts">
+        <h1>Last Week Shifts</h1>
+        <mat-table [dataSource]="lastShifts">
+            <ng-container matColumnDef="user">
+                <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
+                <mat-cell *matCellDef="let item">{{ item.user }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="shiftDate">
+                <mat-header-cell *matHeaderCellDef>Shift Date</mat-header-cell>
+                <mat-cell *matCellDef="let item">{{ item.shiftDate }}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="['user', 'shiftDate']"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: ['user', 'shiftDate']"></mat-row>
+        </mat-table>
+    </div>
+
+    <img src="../../assets/pngwing.com.png">
+
+    <ng-container *ngIf="showAllshifts">
+        <app-all-shifts></app-all-shifts>
+    </ng-container>
+    <ng-container *ngIf="showAllWorkers">
+        <app-all-workers></app-all-workers>
+    </ng-container>
 
 </body>

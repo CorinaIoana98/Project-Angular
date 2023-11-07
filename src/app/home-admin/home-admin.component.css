@@ -1,3 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+
+}
+
+/* body{
+  background: linear-gradient(90deg, #000000 0%, #162d5f 1%, #93b5fe 100%);
+} */
+
 .home-container {
     display: flex;
     justify-content: space-between;
@@ -8,4 +20,38 @@
     z-index: 1000;
     height: 30px;
   }
+  .bestWorker{
+    margin-top: 30px;
+    width: 300px;
+    padding: 20px;
+    margin:auto;
+    border: 1px solid black;
+    text-align: center;
+    margin-bottom: 40px;
+    background-color: #f0f0f0;
+  }
+.worker{
+  text-decoration:underline;
+  font-size: x-large;
+    color:red;
+  }
+
+  .lassWeekShifts{
+    text-align: center;
+    width: 600px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-left: 10px;
+    background-color: #f0f0f1;
+    margin-bottom: 60px;
+  }
+
   
+  img {
+    width: 100px;
+    position: relative;
+   float:right;
+   margin-top: -150px;
+   margin-right:20px;
+  
+  }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+// import { AngularFirestore } from '@angular/fire/firestore';
 
 import {
   createUserWithEmailAndPassword,
@@ -181,26 +182,48 @@ async getAllShifts() {
   const usersQuery = query(usersCollection);
   const userDocs = await getDocs(usersQuery);
 
-  // const allShifts = [];
-  // userDocs.forEach((userDoc) => {
-  //   const userData = userDoc.data();
-  //   if (userData['shifts']) {
-   
-  //     allShifts.push({
-  //       fname: userData['fname'],
-  //       shifts: userData['shifts'],
-  //     });
-  //   }
-  // });
-
-  const usersInfo = userDocs.docs
+  let usersInfo = userDocs.docs
     .map((document) => ({
-      ...document.data(),
-      
+      ...document.data()
     }))
-console.log(usersInfo)
-  return usersInfo;
+
+usersInfo=usersInfo.filter(user => user['shifts'] && user['shifts'].length > 0);
+
+    return usersInfo;
 }
+
+async lastWeekShifts() {
+  const usersCollection = collection(this.firestore, 'users');
+  const usersQuery = query(usersCollection);
+  const userDocs = await getDocs(usersQuery);
+
+const sevenDaysAgo = new Date();
+sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+const lastWeekShifts=[];
+
+  userDocs.docs.forEach((userDoc) => {
+    const userData = userDoc.data();
+    const firstName = userData['fname'];
+    const lastName = userData['lname'];
+    const shifts = userData['shifts'] || [];
+    // console.log(shifts);
+  
+    shifts.forEach((shift) => {
+      const shiftDate = new Date(shift.date);
+  
+          if (shiftDate >= sevenDaysAgo) {
+            lastWeekShifts.push({  user: `${firstName} ${lastName}`,
+            shiftDate: shift.date})
+       // console.log(`User: ${firstName} ${lastName}` + " " + `Shift Date: ${shift.date}`);
+      }
+
+    });
+  });
+  console.log(lastWeekShifts);
+  return lastWeekShifts;
+}
+
 
 
 async getAllWorkers(){
@@ -213,7 +236,6 @@ async getAllWorkers(){
     const userData=userDoc.data();
     if(userData['isAdmin']==false){
       allWorkers.push({
-        // uid:userData['uid'],
         fname:userData['fname'],
         lname:userData['lname'],
         email:userData['email']
@@ -221,15 +243,29 @@ async getAllWorkers(){
     }
     
   })
-  console.log(allWorkers);
+  // console.log(allWorkers);
 return allWorkers;
-
 }
 
-// getPersons() {
-//   let usersRef = db.collection('users');
-//   return this.firestore.collection('users').valueChanges();
-// }
+searchShifts(name: string, startDate: Date, endDate: Date, place: string) {
+  const shiftsCollection = collection(this.firestore, 'users');
+  let query:any;
+  query = query(shiftsCollection);
+  if (name) {
+    query = where('name', '==', name);
+  }
+  if (startDate) {
+    query = where('date', '>=', startDate);
+  }
+  if (endDate) {
+    query = where('date', '<=', endDate);
+  }
+  if (place) {
+    query = where('place', '==', place);
+  }
+  
+  return getDocs(query);
+}
 
 }
 
