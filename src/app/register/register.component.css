@@ -1,11 +1,23 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace;
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
 }
-.registerForm{
-    width: 100px;
-    margin: 20px 0 0 40px;
+.registerForm {
+  width: 100px;
+  margin: 20px 0 0 40px;
+}
+img {
+  width: 100px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.header {
+  text-align: center;
+  background-color: #f2f2f2;
+  padding: 20px;
 }

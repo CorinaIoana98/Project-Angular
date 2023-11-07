@@ -1,7 +1,13 @@
 <div class="home-container">
-  <p *ngIf="currentUser">Hello, {{ currentUser.fname }} !</p>
-  <p>LOGO</p>
-  <button (click)="logout()">Logout</button>
+  <h1 *ngIf="currentUser">Hello, {{ currentUser.fname }} !</h1>
+  <h1>Home Page</h1>
+  <br />
+  <!-- <button (click)="logout()">Logout</button> -->
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="submit" (click)="logout()">
+      Logout
+    </button>
+  </mat-card-actions>
 </div>
 
 <div class="menu">
@@ -13,7 +19,9 @@
     <button mat-menu-item (click)="toggleEditProfile()">Edit Profile</button>
   </mat-menu>
 
-  <button mat-button [matMenuTriggerFor]="menu">Open Menu</button>
+  <button mat-button [matMenuTriggerFor]="menu" class="OpenMenuButton">
+    Open Menu
+  </button>
 </div>
 
 <ng-container *ngIf="showAddShift">
@@ -25,3 +33,4 @@
 <ng-container *ngIf="showEditProfile">
   <app-editprofile></app-editprofile>
 </ng-container>
+<img src="../../assets/pngwing.com.png" />
