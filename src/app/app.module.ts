@@ -24,6 +24,7 @@ import { EditShiftsComponent } from './menu/edit-shifts/edit-shifts.component';
 import { ToastrService } from 'ngx-toastr';
 import { AllShiftsComponent } from './menu/all-shifts/all-shifts.component';
 import { AllWorkersComponent } from './menu/all-workers/all-workers.component';
+import { EditUserAdminComponent } from './menu/edit-user-admin/edit-user-admin.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AllWorkersComponent } from './menu/all-workers/all-workers.component';
     EditShiftsComponent,
     AllShiftsComponent,
     AllWorkersComponent,
+    EditUserAdminComponent,
   ],
 
   imports: [

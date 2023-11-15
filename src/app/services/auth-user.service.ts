@@ -31,6 +31,9 @@ import { Auth, onAuthStateChanged } from 'firebase/auth';
   providedIn: 'root',
 })
 export class AuthService {
+  filter(arg0: (employee: any) => boolean) {
+    throw new Error('Method not implemented.');
+  }
   shifts: any;
   constructor(private firestore: Firestore, private route: Router) {}
 

@@ -26,17 +26,17 @@ this.authService.getAllShifts().then((result)=>{
 })
   }
 
-  isShiftVisible(shift: any): boolean {
+  isShiftVisible(shift: any) {
     const isNameMatch = !this.searchName || shift.shiftName.includes(this.searchName);
     const isStartDateMatch = !this.searchStartDate || new Date(shift.date) >= new Date(this.searchStartDate);
-    const isEndDateMatch = !this.searchEndDate || new Date(shift.date) <= new Date(this.searchEndDate);
+    const isEndDateMatch = !this.searchEndDate || new Date(shift.endTime) <= new Date(this.searchEndDate);
     const isPlaceMatch = !this.searchPlace || shift.place.includes(this.searchPlace);
-    // if(isNameMatch && isStartDateMatch && isEndDateMatch && isPlaceMatch )
+    if(isNameMatch && isStartDateMatch && isEndDateMatch && isPlaceMatch )
     return isNameMatch && isStartDateMatch && isEndDateMatch && isPlaceMatch;
   }
   
   performSearch() {
-     // usersInfo=usersInfo.filter(user => user['shifts'] && user['shifts'].length > 0);
+     //usersInfo=usersInfo.filter(user => user['shifts'] && user['shifts'].length > 0);
     this.authService
       .searchShifts(this.searchName, this.searchStartDate, this.searchEndDate, this.searchPlace)
       .then((querySnapshot) => {
@@ -44,7 +44,7 @@ this.authService.getAllShifts().then((result)=>{
         this.shifts = querySnapshot.docs.map((doc) => doc.data());
       });
    
-      // this.shifts=this.shifts.filter()
+     // this.shifts=this.shifts.filter()
   }
 
   // shifts: MatTableDataSource<any>;
@@ -53,6 +53,8 @@ this.authService.getAllShifts().then((result)=>{
   //     this.shifts = new MatTableDataSource(data);
   //   });
   // }
+  
+
 
 }
 

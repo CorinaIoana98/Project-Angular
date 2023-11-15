@@ -40,7 +40,6 @@ export class EditprofileComponent {
 
   async onSubmit() {
     if (this.profileForm.valid) {
-      //actualizarea in firebase
       console.log('Profile Data:', this.profileForm.value);
       const updatedUserProfile = {
         firstName: this.profileForm.controls['firstName'].value,

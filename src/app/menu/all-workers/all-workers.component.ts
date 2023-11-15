@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+// import { User } from 'firebase/auth';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth-user.service';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-all-workers',
@@ -11,8 +15,10 @@ export class AllWorkersComponent {
   // users;
   // workers=[];
   users: MatTableDataSource<any>;
-  constructor(private authService: AuthService) {}
 
+  constructor(private authService: AuthService, public dialog: MatDialog,) {}
+
+ 
 
   ngOnInit() {
     this.authService.getAllWorkers().then((data) => {
@@ -25,4 +31,11 @@ export class AllWorkersComponent {
 // this.users = result
 //     })
 //       }
+
+editProfile(user:any){
+
+}
+deleteAccount(user: any) {
+
+}
 }

@@ -16,7 +16,25 @@
             <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="['fname', 'lname', 'email']"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: ['fname', 'lname', 'email']"></mat-row>
-    </mat-table>
-</div>
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <button mat-icon-button (click)="editProfile(user)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <button mat-icon-button (click)="deleteAccount(user)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="['fname', 'lname', 'email', 'edit', 'delete']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['fname', 'lname', 'email', 'edit', 'delete']"></mat-row>
+        </mat-table>
+      </div>
