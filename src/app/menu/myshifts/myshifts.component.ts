@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth-user.service';
-import { MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-myshifts',
@@ -20,11 +22,23 @@ export class MyshiftsComponent implements OnInit {
     'editShift',
     'deleteShift',
   ];
+  searchStartDate: Date;
+  searchEndDate: Date;
+  filteredShifts: any[] = [];
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource = new MatTableDataSource();
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private liveAnnouncer: LiveAnnouncer
+  ) {}
   async ngOnInit(): Promise<void> {
     (await this.authService.getEditShifts()).subscribe((data: Array<any>) => {
       this.shifts = data;
+      this.filteredShifts = this.shifts;
+      this.filteredShifts.forEach((shift) => (shift.isVisible = true));
+      this.dataSource = new MatTableDataSource(this.filteredShifts);
+      this.dataSource.sort = this.sort;
       console.log(this.shifts);
     });
   }
@@ -44,5 +58,27 @@ export class MyshiftsComponent implements OnInit {
         console.error('Invalid data received:', data);
       }
     });
+  }
+
+  performSearch() {
+    this.filteredShifts.forEach((shift) => {
+      if (
+        new Date(shift.date) >= new Date(this.searchStartDate) &&
+        new Date(shift.date) <= new Date(this.searchEndDate)
+      ) {
+        shift.isVisible = true;
+      } else {
+        shift.isVisible = false;
+      }
+    });
+  }
+  //sort by wage?????
+  announceSortChange(sortState: Sort) {
+    console.log(sortState);
+    if (sortState.direction) {
+      this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this.liveAnnouncer.announce('Sorting cleared');
+    }
   }
 }
