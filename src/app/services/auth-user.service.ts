@@ -15,6 +15,7 @@ import {
   addDoc,
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -23,12 +24,21 @@ import {
   updateDoc,
   where,
 } from '@angular/fire/firestore';
-import { Auth, onAuthStateChanged } from 'firebase/auth';
+import { Auth, deleteUser, onAuthStateChanged } from 'firebase/auth';
+
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  Auth: any;
+  updateUserAdm(arg0: { firstName: string; lastName: string; }, user: any) {
+    throw new Error('Method not implemented.');
+  }
+  collection(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
   filter(arg0: (employee: any) => boolean) {
     throw new Error('Method not implemented.');
   }
@@ -84,18 +94,18 @@ export class AuthService {
   async isUserAdmin(): Promise<boolean> {
     const auth = getAuth();
     const user = auth.currentUser;
-
+  
     if (user) {
       const userDocRef = doc(this.firestore, 'users', user.uid);
       const userDoc = await getDoc(userDocRef);
-
+  
       if (userDoc.exists()) {
         const userData = userDoc.data();
         return userData['isAdmin'] === true;
       }
     }
-
-    return false; // User not found or not an admin
+  
+    return false;
   }
 
   async getCurrentUser() {
@@ -142,6 +152,7 @@ export class AuthService {
       });
     });
   }
+  
   async getEditShifts() {
     const auth = getAuth();
     return new Observable((observer) => {
@@ -159,7 +170,6 @@ export class AuthService {
   async deleteShifts(shift_Name) {
     const auth = getAuth();
     let userData: any;
-    // this.shifts = [];
     return new Observable((observer) => {
       auth.onAuthStateChanged(async (user) => {
         if (user) {
@@ -177,93 +187,103 @@ export class AuthService {
     });
   }
 
-  async getAllShifts() {
-    const usersCollection = collection(this.firestore, 'users');
-    const usersQuery = query(usersCollection);
-    const userDocs = await getDocs(usersQuery);
 
-    let usersInfo = userDocs.docs.map((document) => ({
-      ...document.data(),
-    }));
+async getAllShifts() {
+  const usersCollection = collection(this.firestore, 'users');
+  const usersQuery = query(usersCollection);
+  const userDocs = await getDocs(usersQuery);
 
-    usersInfo = usersInfo.filter(
-      (user) => user['shifts'] && user['shifts'].length > 0
-    );
+  let usersInfo = userDocs.docs
+    .map((document) => ({
+      ...document.data()
+    }))
+
+usersInfo=usersInfo.filter(user => user['shifts'] && user['shifts'].length > 0);
 
     return usersInfo;
-  }
+}
 
-  async lastWeekShifts() {
-    const usersCollection = collection(this.firestore, 'users');
-    const usersQuery = query(usersCollection);
-    const userDocs = await getDocs(usersQuery);
+async lastWeekShifts() {
+  const usersCollection = collection(this.firestore, 'users');
+  const usersQuery = query(usersCollection);
+  const userDocs = await getDocs(usersQuery);
 
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+const sevenDaysAgo = new Date();
+sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-    const lastWeekShifts = [];
+const lastWeekShifts=[];
 
-    userDocs.docs.forEach((userDoc) => {
-      const userData = userDoc.data();
-      const firstName = userData['fname'];
-      const lastName = userData['lname'];
-      const shifts = userData['shifts'] || [];
-      // console.log(shifts);
-
-      shifts.forEach((shift) => {
-        const shiftDate = new Date(shift.date);
-
-        if (shiftDate >= sevenDaysAgo) {
-          lastWeekShifts.push({
-            user: `${firstName} ${lastName}`,
-            shiftDate: shift.date,
-          });
-          // console.log(`User: ${firstName} ${lastName}` + " " + `Shift Date: ${shift.date}`);
-        }
-      });
-    });
-    console.log(lastWeekShifts);
-    return lastWeekShifts;
-  }
-
-  async getAllWorkers() {
-    const userCollection = collection(this.firestore, 'users');
-    const usersQuery = query(userCollection);
-    const userDocs = await getDocs(usersQuery);
-
-    const allWorkers = [];
-    userDocs.forEach((userDoc) => {
-      const userData = userDoc.data();
-      if (userData['isAdmin'] == false) {
-        allWorkers.push({
-          fname: userData['fname'],
-          lname: userData['lname'],
-          email: userData['email'],
-        });
+  userDocs.docs.forEach((userDoc) => {
+    const userData = userDoc.data();
+    const firstName = userData['fname'];
+    const lastName = userData['lname'];
+    const shifts = userData['shifts'] || [];
+   
+  
+    shifts.forEach((shift) => {
+      const shiftDate = new Date(shift.date);
+  
+          if (shiftDate >= sevenDaysAgo) {
+            lastWeekShifts.push({  user: `${firstName} ${lastName}`,
+            shiftDate: shift.date})
       }
+
     });
-    // console.log(allWorkers);
-    return allWorkers;
-  }
+  });
+  console.log(lastWeekShifts);
+  return lastWeekShifts;
+}
 
-  searchShifts(name: string, startDate: Date, endDate: Date, place: string) {
-    const shiftsCollection = collection(this.firestore, 'users');
-    let query: any;
-    query = query(shiftsCollection);
-    console.log(query);
-    if (name) {
-      query = where('name', '==', name);
-    }
-    if (startDate) {
-      query = where('date', '>=', startDate);
-    }
-    if (endDate) {
-      query = where('date', '<=', endDate);
-    }
-    if (place) {
-      query = where('place', '==', place);
-    }
 
-    return getDocs(query);
+
+async getAllWorkers(){
+  const userCollection = collection(this.firestore, 'users');
+  const usersQuery = query(userCollection);
+  const userDocs = await getDocs(usersQuery);
+  
+  const allWorkers=[];
+  userDocs.forEach((userDoc)=>{
+    const userData=userDoc.data();
+    if(userData['isAdmin']==false){
+      allWorkers.push({
+        fname:userData['fname'],
+        lname:userData['lname'],
+        email:userData['email']
+      })
+    }
+    
+  })
+return allWorkers;
+}
+
+searchShifts(name: string, startDate: Date, endDate: Date, place: string) {
+  const shiftsCollection = collection(this.firestore, 'users');
+  let query:any;
+  query = query(shiftsCollection);
+  if (name) {
+    query = where('name', '==', name);
   }
+  if (startDate) {
+    query = where('date', '>=', startDate);
+  }
+  if (endDate) {
+    query = where('date', '<=', endDate);
+  }
+  if (place) {
+    query = where('place', '==', place);
+  }
+  
+  return getDocs(query);
+}
+
+  async deleteUser(user:any){
+  const userDocRef = doc(this.firestore, 'users', user.fname);
+
+  try {
+    await deleteDoc(userDocRef);
+    console.log('User deleted successfully from Firebase!');
+  } catch (error) {
+    console.error('Error deleting user from Firebase:', error);
+  }
+}
 }

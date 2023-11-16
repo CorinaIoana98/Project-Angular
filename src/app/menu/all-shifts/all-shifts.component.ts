@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth-user.service';
   styleUrls: ['./all-shifts.component.css']
 })
 export class AllShiftsComponent {
+showEditProfile: any;
 
   constructor(private authService: AuthService) {}
 
@@ -36,23 +37,18 @@ this.authService.getAllShifts().then((result)=>{
   }
   
   performSearch() {
-     //usersInfo=usersInfo.filter(user => user['shifts'] && user['shifts'].length > 0);
     this.authService
       .searchShifts(this.searchName, this.searchStartDate, this.searchEndDate, this.searchPlace)
       .then((querySnapshot) => {
 
         this.shifts = querySnapshot.docs.map((doc) => doc.data());
       });
-   
-     // this.shifts=this.shifts.filter()
+ 
   }
 
-  // shifts: MatTableDataSource<any>;
-  // ngOnInit() {
-  //   this.yourService.getShiftData().then((data) => {
-  //     this.shifts = new MatTableDataSource(data);
-  //   });
-  // }
+  
+
+
   
 
 

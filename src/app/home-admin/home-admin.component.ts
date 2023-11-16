@@ -15,6 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class HomeAdminComponent {
   bestWorker: any;
+
   constructor( private router: Router, private AuthService: AuthService ){
     this.AuthService.getCurrentUser().then(observable=>{
       observable.subscribe(data=>{
@@ -44,7 +45,9 @@ if(this.showAllWorkers == true)  this.showAllWorkers = !this.showAllWorkers;
     this.showAllWorkers = !this.showAllWorkers;
   }
 
-// lastShifts:any;
+  showEditProfile:boolean=false;
+
+
  userName:any;
  shifs:any;
  lastShifts: MatTableDataSource<any>;

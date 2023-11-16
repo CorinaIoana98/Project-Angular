@@ -15,6 +15,7 @@ export class AllWorkersComponent {
   // users;
   // workers=[];
   users: MatTableDataSource<any>;
+  selectedUser: any;
 
   constructor(private authService: AuthService, public dialog: MatDialog,) {}
 
@@ -32,10 +33,13 @@ export class AllWorkersComponent {
 //     })
 //       }
 
-editProfile(user:any){
-
+showEditProfile:boolean=false;
+toggleEditUser(user:any){
+  this.selectedUser=user
+  this.showEditProfile = !this.showEditProfile;
+  this.authService.updateUserAdm({ firstName: 'New First Name', lastName: 'New Last Name' }, user);
 }
 deleteAccount(user: any) {
-
+this.authService.deleteUser(user.id);
 }
 }

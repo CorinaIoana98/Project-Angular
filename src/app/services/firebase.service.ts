@@ -47,13 +47,28 @@ export class UserServiceFirestoreService {
 
     const userDocRef = doc(this.firestore2, 'users', auth.currentUser.uid);
     const userDoc = getDoc(userDocRef);
-    let userData = (await userDoc).data();
+    let userData =(await userDoc).data();
 
     userData['firstName'] = updatedProfile.firstName;
     userData['lastName'] = updatedProfile.lastName;
 
     await updateDoc(userDocRef, userData);
   }
+
+  async updateUserAdm(updatedProfile: { firstName: string; lastName: string }, selectedUser: any) {
+    const userDocRef = doc(this.firestore2, 'users', selectedUser.userId);
+  
+    const userDoc = await getDoc(userDocRef);
+    let userData = userDoc.data();
+  
+    userData['firstName'] = updatedProfile.firstName;
+    userData['lastName'] = updatedProfile.lastName;
+  
+    await updateDoc(userDocRef, userData);
+  }
+  
+
+  
 
   deleteUser(id: any, collection: any) {
     const document = this.firestore.collection(collection).doc(id);

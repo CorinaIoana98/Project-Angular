@@ -1,15 +1,9 @@
-<form (ngSubmit)="onSubmit()">
+<form  [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
   <label for="fname">First Name:</label>
   <input type="text" id="fname" [(ngModel)]="data.fname" name="fname" required>
 
   <label for="lname">Last Name:</label>
   <input type="text" id="lname" [(ngModel)]="data.lname" name="lname" required>
-
-  <label for="email">Email:</label>
-  <input type="email" id="email" [(ngModel)]="data.email" name="email" required>
-
-  <label for="birthDate">Birth Date:</label>
-  <input type="date" id="birthDate" [(ngModel)]="data.birthDate" name="birthDate" required>
 
   <button type="button" (click)="onCancelClick()">Cancel</button>
   <button type="submit">Save</button>
