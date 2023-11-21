@@ -100,8 +100,6 @@ export class RegisterComponent implements OnInit {
           console.error('Error adding user:', err);
         });
     } 
-    // else 
-    //   this.toastr.error("Please complete all the fields!")
     
     }
     

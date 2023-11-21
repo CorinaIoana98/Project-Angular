@@ -22,17 +22,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // login() {
-  //   this.authService.login(
-  //     this.loginForm.value.email,
-  //     this.loginForm.value.password).then(result=>{
-  //     if(result)   this.route.navigate(['/home']);
-  //     else 
-  //     { alert("User not found"); }
-  //   });
-  //   console.log('user logged in');
-  // }
-
   async login() {
     const result = await this.authService.login(
       this.loginForm.value.email,

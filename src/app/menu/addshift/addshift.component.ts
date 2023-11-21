@@ -15,6 +15,7 @@ import { UserServiceFirestoreService } from 'src/app/services/firebase.service';
 export class AddshiftComponent {
   shiftForm: any;
   AuthService: any;
+  router: any;
   // ngOnInit() {
   //   this.shiftForm = new FormGroup({
   //     shiftName: new FormControl(new Date().getTime()),
@@ -48,7 +49,9 @@ export class AddshiftComponent {
         ),
       };
       this.fireBase.addNewShift(shift);
-      this.shiftForm.reset();
+      // this.router.navigate(['/home']);
+   //   this.shiftForm.reset();
+      window.location.reload();
     }
   }
   async saveShifts() {

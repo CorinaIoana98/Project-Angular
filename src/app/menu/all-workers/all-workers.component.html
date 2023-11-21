@@ -2,41 +2,69 @@
 <hr>
 <h1>All workers registered</h1>
 <div>
-    <mat-table [dataSource]="users">
-        <ng-container matColumnDef="fname">
-            <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
-            <mat-cell *matCellDef="let user">{{ user.fname }}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="lname">
-            <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
-            <mat-cell *matCellDef="let user">{{ user.lname }}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="email">
-            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
-            <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
-        </ng-container>
+  <mat-table [dataSource]="users">
+    <ng-container matColumnDef="fname">
+      <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.fname }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lname">
+      <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.lname }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="edit">
-            <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-            <mat-cell *matCellDef="let user">
-              <button mat-menu-item (click)="toggleEditUser(user)">
-                <mat-icon>edit</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
-      
-          <ng-container matColumnDef="delete">
-            <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-            <mat-cell *matCellDef="let user">
-              <button mat-icon-button (click)="deleteAccount(user)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
-      
-          <mat-header-row *matHeaderRowDef="['fname', 'lname', 'email', 'edit', 'delete']"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: ['fname', 'lname', 'email', 'edit', 'delete']"></mat-row>
-        </mat-table>
-      </div>
-      <ng-container *ngIf="showEditProfile">
-        <app-editprofile></app-editprofile>
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button mat-menu-item (click)="toggleEditUser(user)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button mat-icon-button (click)="deleteAccount(user)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['fname', 'lname', 'email', 'edit', 'delete']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['fname', 'lname', 'email', 'edit', 'delete']"></mat-row>
+  </mat-table>
+</div>
+<ng-container *ngIf="showEditProfile">
+  <app-editprofile></app-editprofile>
+
+
+  <!-- <br><br>
+
+<hr>
+<h1>All workers registered</h1>
+<div>
+  <mat-table [dataSource]="users">
+    <ng-container matColumnDef="fname">
+      <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.fname }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lname">
+      <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.lname }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['fname', 'lname', 'email']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['fname', 'lname', 'email']"></mat-row>
+  </mat-table>
+</div>
+<ng-container *ngIf="showEditProfile">
+  <app-editprofile></app-editprofile>
+</ng-container> -->

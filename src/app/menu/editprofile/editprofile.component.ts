@@ -47,6 +47,7 @@ export class EditprofileComponent {
       };
 
       await this.firebase.updateUser(updatedUserProfile);
+      window.location.reload();
     }
   }
 }

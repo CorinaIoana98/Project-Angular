@@ -63,6 +63,9 @@ export class EditShiftsComponent {
       };
 
       await this.firebase.updateShift(this.currentShiftId, updatedShift);
+      window.location.reload();
+      //this.route.navigate(['/home']);
+  
     }
   }
 }

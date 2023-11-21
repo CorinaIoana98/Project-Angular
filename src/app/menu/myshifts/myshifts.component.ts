@@ -41,6 +41,7 @@ export class MyshiftsComponent implements OnInit {
       this.dataSource.sort = this.sort;
       console.log(this.shifts);
     });
+  
   }
   // async deleteShifts(shift_Name) {
   //   (await this.authService.deleteShifts(shift_Name)).subscribe((data) => {
@@ -58,6 +59,8 @@ export class MyshiftsComponent implements OnInit {
         console.error('Invalid data received:', data);
       }
     });
+    
+    window.location.reload();
   }
 
   performSearch() {
